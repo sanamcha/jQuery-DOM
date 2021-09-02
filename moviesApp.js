@@ -1,36 +1,36 @@
 let newList = [];
-let currentId = 0;
+let currId = 0;
 
 $(function() {
   // form submit to add list 
 
-  $("#form").on("submit", function(evt) {
-    evt.preventDefault();
+  $("#form").on("submit", function(e) {
+    e.preventDefault();
     let title = $("#title").val();
     let rating = $("#rating").val();
     
-    currentId++
-    newList.push({ title, rating, currentId });
+    currId++
+    newList.push({ title, rating, currId });
 
-    $("#td").append(createNewDataHTML({ title, rating, currentId }));
+    $("#td").append(newData({ title, rating, currId }));
     $("#form").trigger("reset");
     
   });
 
   // remove list when click on delete button
 
-  $("#td").on("click", ".btn.btn-danger", function(evt) {
-    $(evt.target).closest("tr").remove();
+  $("#td").on("click", ".btn.btn-warning", function(e) {
+    $(e.target).closest("tr").remove();
     });
 
   });
 
-function createNewDataHTML(data) {
+function newData(data) {
   return `
     <tr>
       <td>${data.title}</td>
       <td>${data.rating}</td>
-      <td><button class="btn btn-danger" data-delete-id=${data.currentId}>Delete</button>
+      <td><button class="btn btn-warning" data-delete-id=${data.currId}>Delete</button>
       </td>
     <tr>`;
 }
